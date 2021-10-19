@@ -40,11 +40,12 @@ app.post('/details', async (req, res) => {
     if (Data.length === 0) {
         res.send('No Data Found');
     }
-    QRCode.toFile('Qrcode.png', `https://intense-retreat-16018.herokuapp.com/details${per._id}`, (err, url) => {
+    const qr = `https://desolate-garden-33008.herokuapp.com/details/${per._id}`;
+    QRCode.toDataURL(qr,(err, url) => {
         if (err) {
             res.send("Error occured");
         }
-        res.redirect(`/details/${per._id}`)
+        res.render('qrcode',{url})
     })
 
 });
